@@ -1,0 +1,919 @@
+/* Material Design 变量 */
+:root {
+    --md-primary: #1a73e8;
+    --md-primary-light: #4285f4;
+    --md-secondary: #34a853;
+    --md-error: #ea4335;
+    --md-warning: #fbbc04;
+    --md-surface: #ffffff;
+    --md-background: #f8f9fa;
+    --md-on-surface: #202124;
+    --md-on-surface-medium: #5f6368;
+    --md-on-surface-disabled: #80868b;
+    --md-divider: #dadce0;
+    --md-elevation-1: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+    --md-elevation-2: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
+    --md-elevation-3: 0 1px 3px 0 rgba(60,64,67,0.3), 0 4px 8px 3px rgba(60,64,67,0.15);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    background-color: var(--md-background);
+    color: var(--md-on-surface);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 导航菜单样式 */
+.menu-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--md-surface);
+    box-shadow: var(--md-elevation-1);
+    padding: 8px 16px;
+    z-index: 1000;
+}
+
+.main-nav {
+    display: flex;
+    gap: 8px;
+    max-width: 2400px;
+    margin: 0 auto;
+    padding: 4px;
+}
+
+.nav-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 24px;
+    transition: background-color 0.2s ease;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--md-on-surface-medium);
+}
+
+.nav-item:hover {
+    background-color: rgba(26,115,232,0.04);
+    color: var(--md-primary);
+}
+
+.nav-item.active {
+    background-color: rgba(26,115,232,0.12);
+    color: var(--md-primary);
+}
+
+/* 页面内容样式 */
+.page-content {
+    display: none;
+    padding: 84px 48px 48px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.page-content.active {
+    display: block;
+}
+
+/* 卡片容器样式 */
+.voice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 卡片基础样式 */
+.api-section, .characters-section, .dialogue-section, .audio-section {
+    background: var(--md-surface);
+    padding: 16px 24px;
+    border-radius: 8px;
+    box-shadow: var(--md-elevation-1);
+    transition: box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.api-section:hover, .characters-section:hover, .dialogue-section:hover, .audio-section:hover {
+    box-shadow: var(--md-elevation-2);
+}
+
+/* 输入框样式 */
+input[type="text"], textarea, .batch-dialogue {
+    width: 100%;
+    padding: 16px 20px;
+    border: 1px solid var(--md-divider);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--md-on-surface);
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus, textarea:focus, .batch-dialogue:focus {
+    outline: none;
+    border-color: var(--md-primary);
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+/* 按钮样式 */
+button {
+    padding: 12px 32px;
+    background-color: var(--md-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: "Google Sans", Roboto, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.25px;
+}
+
+button:hover {
+    background-color: var(--md-primary-light);
+    box-shadow: var(--md-elevation-1);
+}
+
+button:active {
+    background-color: var(--md-primary);
+    box-shadow: var(--md-elevation-2);
+}
+
+/* 声音选择下拉菜单样式 */
+.voice-select {
+    flex: 1;
+    padding: 12px 16px;
+    border: 1px solid var(--md-divider);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--md-on-surface);
+    background-color: var(--md-surface);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+.voice-select:focus {
+    outline: none;
+    border-color: var(--md-primary);
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+.voice-select:hover {
+    border-color: var(--md-primary-light);
+}
+
+.voice-select option {
+    padding: 12px;
+    font-size: 16px;
+}
+
+/* 角色卡片样式 */
+.character-card {
+    background: var(--md-surface);
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--md-divider);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.character-card:hover {
+    box-shadow: var(--md-elevation-1);
+}
+
+.character-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+}
+
+.character-info input {
+    min-width: 0;
+}
+
+.voice-id-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 200px;
+}
+
+.voice-id-group input {
+    flex: 1;
+}
+
+.voice-id-group button {
+    padding: 8px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.voice-select-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.voice-select {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+.voice-params {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 400px;
+}
+
+.param-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.param-group label {
+    font-size: 12px;
+    margin: 0;
+    min-width: 40px;
+}
+
+.param-group input[type="range"] {
+    flex: 1;
+    min-width: 80px;
+}
+
+.param-group .param-value {
+    font-size: 12px;
+    min-width: 30px;
+    text-align: right;
+}
+
+.character-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.character-controls button {
+    padding: 6px;
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: var(--md-on-surface-medium);
+    border: 1px solid var(--md-divider);
+}
+
+.character-controls button:hover {
+    background-color: var(--md-background);
+    color: var(--md-primary);
+    box-shadow: none;
+}
+
+.character-controls svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* 角色列表样式 */
+.character-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 滑块样式 */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    background: var(--md-divider);
+    border-radius: 2px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--md-primary);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* 进度条样式 */
+.progress-bar {
+    display: none;  /* 默认隐藏 */
+    height: 4px;
+    background-color: rgba(26,115,232,0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.progress-bar.active {
+    display: block;  /* 只在激活时显示 */
+}
+
+.progress {
+    height: 100%;
+    width: 0;  /* 初始宽度为0 */
+    background-color: var(--md-primary);
+    transition: width 0.3s ease;
+}
+
+/* 标签样式 */
+label {
+    color: var(--md-on-surface-medium);
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* 标题样式 */
+.section-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--md-on-surface);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--md-divider);
+}
+
+/* 对话输入区域样式 */
+.dialogue-section textarea {
+    width: 100%;
+    min-height: calc(1.5em * 3 + 32px); /* 3行文本的高度（行高1.5，上下padding各16px） */
+    height: auto;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    resize: vertical; /* 允许垂直方向调整大小 */
+    line-height: 1.5;
+    padding: 16px;
+    font-size: 16px;
+    font-family: inherit;
+    border: 1px solid var(--md-divider);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.dialogue-section textarea:focus {
+    outline: none;
+    border-color: var(--md-primary);
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+/* 当有内容时自动调整度 */
+.dialogue-section textarea:not(:empty) {
+    height: fit-content;
+}
+
+/* 音频控制区域样式 */
+.audio-controls {
+    margin-top: 12px;
+}
+
+#audio-list {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.audio-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 16px;
+    background: var(--md-background);
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.audio-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;  /* 防止文本溢出 */
+}
+
+.audio-info .character-name {
+    font-weight: 500;
+    color: var(--md-primary);
+    white-space: nowrap;
+    padding: 2px 8px;
+    background-color: rgba(26,115,232,0.1);
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.audio-info .dialogue-text {
+    color: var(--md-on-surface);
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 音频元素样式 */
+.audio-item audio {
+    height: 32px;
+    margin: 0;
+}
+
+/* 合并后的音频样式 */
+.merged-audio-player .audio-item {
+    padding: 8px 16px;
+}
+
+.merged-audio-player .audio-info {
+    flex: 0 0 auto;
+}
+
+.merged-audio-player audio {
+    flex: 1;
+    height: 32px;
+}
+
+/* 响应式布局 */
+@media (max-width: 2400px) {
+    .voice-container {
+        max-width: 100%;
+    }
+    
+    .character-list {
+        grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    }
+}
+
+@media (max-width: 1200px) {
+    .voice-container {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+    .voice-container {
+        padding: 0;
+    }
+    
+    .character-list {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+    .page-content {
+        padding: 76px 16px 16px;
+    }
+    
+    .character-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-item {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+/* 整体容器样式 */
+.voice-container, .message-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* API密钥区域样式 */
+.api-section {
+    width: 100%;
+    padding: 16px 32px;
+    box-sizing: border-box;
+}
+
+.api-input-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+}
+
+.api-input-group label {
+    white-space: nowrap;
+    margin: 0;
+    min-width: fit-content;
+    color: var(--md-on-surface-medium);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.api-input-wrapper {
+    display: flex;
+    flex: 1;
+    gap: 16px;
+}
+
+.api-input-wrapper input {
+    flex: 1;
+}
+
+.api-status {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.api-status.success, .api-status.error {
+    opacity: 1;
+}
+
+.api-status.success::before {
+    content: "✓";
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.api-status.success {
+    background-color: var(--md-secondary);
+}
+
+.api-status.error::before {
+    content: "!";
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.api-status.error {
+    background-color: var(--md-error);
+}
+
+/* 角色管理区域样式 */
+.character-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+/* 对话格式提示样式 */
+.dialogue-format-tip {
+    background: var(--md-background);
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--md-on-surface-medium);
+}
+
+.dialogue-format-tip pre {
+    margin: 8px 0;
+    padding: 8px;
+    background: var(--md-surface);
+    border-radius: 4px;
+    border: 1px solid var(--md-divider);
+}
+
+/* 对话预览样式 */
+.dialogue-preview {
+    display: none;  /* 默认隐藏 */
+    margin-top: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 12px;
+    background-color: #f8f9fa;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dialogue-preview:not(:empty) {
+    display: block;  /* 当有内容时显示 */
+}
+
+.dialogue-preview-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.dialogue-preview-item:last-child {
+    margin-bottom: 0;  /* 最后一项不需要底部间距 */
+}
+
+.dialogue-preview-item .character-name {
+    min-width: 80px;
+    padding: 4px 8px;
+    margin-right: 15px;
+    background-color: #1a73e8;
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.dialogue-preview-item .dialogue-text {
+    flex: 1;
+    padding: 4px 0;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* 美化滚动条 */
+.dialogue-preview::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dialogue-preview::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.dialogue-preview::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.dialogue-preview::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* 按钮组样式 */
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+/* 短信界面样式优化 */
+.edit-section .config-area,
+.edit-section .text-input-area {
+    background: var(--md-surface);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: var(--md-elevation-1);
+}
+
+.preview-section {
+    background: var(--md-surface);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: var(--md-elevation-1);
+}
+
+/* 短信界面样式 */
+.message-container {
+    display: grid;
+    grid-template-columns: 450px 1fr;
+    gap: 32px;
+    width: 100%;
+    box-sizing: border-box;
+    height: calc(100vh - 100px);
+}
+
+.edit-section {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.preview-section {
+    height: 100%;
+    position: sticky;
+    top: 100px;
+}
+
+/* 输入框和文本域样式 */
+input[type="text"], 
+input[type="password"],
+textarea, 
+.batch-dialogue,
+select,
+.voice-select {
+    padding: 12px 16px;
+    border: 1px solid var(--md-divider);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--md-on-surface);
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--md-surface);
+}
+
+/* 按钮样式优化 */
+.character-controls {
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.character-controls button {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* 合并音频区域样式 */
+.merged-audio-container {
+    margin-top: 16px;
+    padding: 12px;
+    background: var(--md-background);
+    border-radius: 8px;
+    border: 1px solid var(--md-divider);
+}
+
+.merged-audio-container h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: var(--md-on-surface);
+}
+
+.merged-audio-player .audio-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--md-surface);
+    border-radius: 8px;
+    box-shadow: var(--md-elevation-1);
+}
+
+.merged-audio-player .download-audio {
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: var(--md-secondary);
+}
+
+.merged-audio-player .download-audio:hover {
+    background-color: var(--md-secondary);
+    opacity: 0.9;
+}
+
+/* 按钮组样式 */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.button-group button {
+    flex: 1;
+    white-space: nowrap;
+}
+
+/* 角色管理区域样式 */
+.characters-section h2 {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+.characters-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.add-character-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: normal;
+    background-color: var(--md-secondary);
+    height: 32px;
+    line-height: 20px;
+}
+
+.add-character-btn:hover {
+    background-color: var(--md-secondary);
+    opacity: 0.9;
+}
+
+/* 对话输入区域样式 */
+.dialogue-section .batch-dialogue {
+    margin: 12px 0;
+}
+
+.dialogue-section .button-group {
+    margin-top: 12px;
+}
+
+/* 音频区域样式 */
+.audio-section .audio-controls {
+    margin-top: 12px;
+}
+
+.merged-audio-container {
+    margin-top: 16px;
+    padding: 12px;
+}
+
+.merged-audio-container h3 {
+    margin: 0 0 12px 0;
+    font-size: 16px;
+}
+
+#audio-list {
+    margin-top: 16px;
+    gap: 12px;
+}
+
+/* 进度条样式调整 */
+.progress-bar {
+    margin-top: 12px;
+}
+
+/* 对话预览样式调整 */
+.dialogue-preview {
+    margin-top: 12px;
+    padding: 12px;
+}
+
+/* 按钮组样式调整 */
+.button-group {
+    gap: 8px;
+    margin: 12px 0;
+}
+
+/* 统一所有模块的标题样式 */
+.characters-section h2,
+.dialogue-section h2,
+.audio-section h2,
+.characters-section .section-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+/* 角色管理区域标题容器样式 */
+.characters-section .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+/* 添加新角色按钮样式 */
+.add-character-btn {
+    padding: 6px 12px;
+    font-size: 14px;
+    text-transform: none;
+    letter-spacing: normal;
+    background-color: var(--md-secondary);
+    height: 32px;
+    line-height: 20px;
+    margin-left: 16px;
+}
+
+.add-character-btn:hover {
+    background-color: var(--md-secondary);
+    opacity: 0.9;
+} 

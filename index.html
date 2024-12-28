@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对话助手</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/chat-bubble.css">
+</head>
+<body>
+    <!-- 导航菜单 -->
+    <div class="menu-container">
+        <nav class="main-nav">
+            <div class="nav-item active" data-page="voice-generator">语音生成</div>
+            <div class="nav-item" data-page="message-generator">短信界面</div>
+        </nav>
+    </div>
+
+    <!-- 语音生成器页面 -->
+    <div class="page-content active" id="voice-generator">
+        <div class="voice-container">
+            <!-- API密钥输入区域 -->
+            <div class="api-section">
+                <div class="api-input-group">
+                    <label for="api-key">ElevenLabs API密钥：<div id="api-status" class="api-status"></div></label>
+                    <div class="api-input-wrapper">
+                        <input type="password" id="api-key" placeholder="请输入您的API密钥">
+                        <button id="verify-api-key">验证密钥</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 角色管理区域 -->
+            <div class="characters-section">
+                <div class="section-header">
+                    <h2>角色管理</h2>
+                    <button id="add-character" class="add-character-btn">添加新角色</button>
+                </div>
+                <div class="character-list" id="character-list">
+                    <!-- 角色列表将通过JS动态生成 -->
+                </div>
+            </div>
+
+            <!-- 对话输入区域 -->
+            <div class="dialogue-section">
+                <h2>对话内容</h2>
+                <textarea id="batch-dialogue" class="batch-dialogue" 
+                    placeholder="请输入对话内容"></textarea>
+                <div id="dialogue-preview" class="dialogue-preview"></div>
+                <button id="parse-dialogue">解析对话</button>
+                <button id="generate-audio">生成语音</button>
+                <div class="progress-bar" id="progress-bar">
+                    <div class="progress"></div>
+                </div>
+            </div>
+
+            <!-- 音频播放区域 -->
+            <div class="audio-section">
+                <h2>生成的音频</h2>
+                <div class="audio-controls">
+                    <div class="merged-audio-container" style="display: none;">
+                        <h3>合并后的音频</h3>
+                        <div class="merged-audio-player"></div>
+                        <div class="button-group">
+                            <button id="merge-audio">合并音频</button>
+                            <button id="merge-audio-no-silence">合并音频（去除静音）</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="audio-list">
+                    <!-- 音频播放器将通过JS动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 短信界面生成器页面 -->
+    <div class="page-content" id="message-generator">
+        <div class="message-container">
+            <!-- 左侧编辑区域 -->
+            <main class="edit-section">
+                <!-- 配置区域 -->
+                <section class="config-area">
+                    <div class="config-item">
+                        <label>发送方标识（右侧）：</label>
+                        <input type="text" id="senderMark" value="A:" placeholder="例如：A" />
+                    </div>
+                    <div class="config-item">
+                        <label>接收方标识（左侧）：</label>
+                        <input type="text" id="receiverMark" value="B:" placeholder="例如：B" />
+                    </div>
+                    <div class="config-item">
+                        <label>联系人名称：</label>
+                        <input type="text" id="contactName" value="联系人" placeholder="输入联系人名称">
+                    </div>
+                    <div class="config-item">
+                        <label>联系人头像：</label>
+                        <div class="avatar-upload">
+                            <input type="file" id="avatarInput" accept="image/*">
+                            <div class="avatar-preview">
+                                <div class="avatar-edit">点击上传头像</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 文本输入区域 -->
+                <section class="text-input-area">
+                    <textarea placeholder="请输入对话内容，格式如：
+A: 你好
+B: 你好
+A: 最近怎么样？
+B: 还不错，你呢？"></textarea>
+                    <div class="button-group">
+                        <button class="add-btn" title="添加图片">
+                            <svg class="icon-add" viewBox="0 0 24 24">
+                                <path d="M12 4v16m-8-8h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button class="generate-btn">生成对话</button>
+                    </div>
+                </section>
+            </main>
+
+            <!-- 右侧预览区域 -->
+            <aside class="preview-section">
+                <div class="preview-actions">
+                    <button class="export-btn">导出对话截图</button>
+                </div>
+                <!-- iPhone 界面容器 -->
+                <div class="iphone-container">
+                    <!-- 导航栏 -->
+                    <div class="nav-bar">
+                        <button class="back-btn">
+                            <svg class="icon-back" viewBox="0 0 24 24">
+                                <path d="M17.2 3.3L15.5 1.7 5.3 12l10.2 10.3 1.7-1.6L8.7 12z"/>
+                            </svg>
+                        </button>
+                        <div class="contact-info">
+                            <div class="avatar-container">
+                                <img class="avatar" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>">
+                                <span class="contact-name">联系人</span>
+                            </div>
+                        </div>
+                        <button class="video-call-btn">
+                            <svg class="icon-video" viewBox="0 0 24 24">
+                                <path d="M2 7.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-9zm16 2l4.5-3v11l-4.5-3v-5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 聊天区域 -->
+                    <div class="chat-container">
+                        <!-- 消息将通过JS动态生成 -->
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- 头像裁剪模态框 -->
+        <dialog class="modal" id="avatarModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>裁剪头像</h3>
+                    <button class="close-btn">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="cropper-container">
+                        <img id="cropperImage" src="" alt="待裁剪的图片">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="cancel-btn">取消</button>
+                    <button class="crop-btn">确定</button>
+                </div>
+            </div>
+        </dialog>
+    </div>
+
+    <!-- 脚本引用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/dialogue-generator.js"></script>
+    <script src="js/message-generator.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html> 
